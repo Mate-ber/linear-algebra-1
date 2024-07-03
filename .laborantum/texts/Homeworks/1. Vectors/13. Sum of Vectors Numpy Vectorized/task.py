@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -23,7 +23,7 @@ os.chdir(path)
 get_ipython().system('{sys.executable} -m pip -q install --user numpy json-tricks torch jupyter nbconvert')
 
 
-# In[2]:
+# In[7]:
 
 
 import json_tricks
@@ -31,23 +31,25 @@ import json_tricks
 path = Path('.laborantum/texts/Homeworks/1. Vectors/13. Sum of Vectors Numpy Vectorized')
 
 
-# In[3]:
+# In[8]:
 
 
 debug_cases = json_tricks.load(str(path / 'testcases' / 'debug_cases.json'))
 public_cases = json_tricks.load(str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[4]:
+# In[9]:
 
 
 import numpy as np
 
 def vector_sum(x, y):
-    return x + y
+    ## YOUR CODE HERE
+    z = x + y
+    return z
 
 
-# In[5]:
+# In[10]:
 
 
 import time

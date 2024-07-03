@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[51]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -23,7 +23,7 @@ os.chdir(path)
 get_ipython().system('{sys.executable} -m pip -q install --user numpy json-tricks torch jupyter nbconvert')
 
 
-# In[4]:
+# In[52]:
 
 
 import json_tricks
@@ -31,14 +31,14 @@ import json_tricks
 path = Path('.laborantum/texts/Homeworks/1. Vectors/33. Exercise Vectors 3')
 
 
-# In[5]:
+# In[53]:
 
 
 debug_cases = json_tricks.load(str(path / 'testcases' / 'debug_cases.json'))
 public_cases = json_tricks.load(str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[15]:
+# In[54]:
 
 
 import numpy as np
@@ -46,43 +46,46 @@ import numpy.typing as npt
 from typing import Dict
 
 def vector_operations(x, y):
+    ## YOUR CODE HERE
+    exp = (2 * x) + y
+    dot_prod = np.dot(x, y)
+        
+    length_x = np.linalg.norm(x)
+    length_y = np.linalg.norm(y)
+    angle = np.arccos(dot_prod / (length_x * length_y))
 
-    a, b = x, y
+    dir_a = np.copy(x)
+    dir_b = np.copy(y)
 
-    dot_ab = (a * b).sum()
+    for i in range(len(dir_a)):
+        dir_a[i] = dir_a[i] / length_x
+        dir_b[i] = dir_b[i] / length_y
 
-    len_a = np.sqrt((a * a).sum())
-    len_b = np.sqrt((b * b).sum())
 
-    angle = np.arccos(dot_ab / len_a / len_b)
-
-    dir_a = a / len_a
-    dir_b = b / len_b
-
-    a_proj_b = dot_ab / len_b ** 2
-    b_proj_a = dot_ab / len_a ** 2
-
-    a_orth_b = a - a_proj_b
-    b_orth_a = b - b_proj_a
+    a_proj_b = (dot_prod / length_y * length_y) * y
+    b_proj_a = (dot_prod / length_x * length_x) * x
+    
+    a_orth_b = y - a_proj_b
+    b_orth_a = x - b_proj_a
 
     answer = {
-        'expression': 2 * a + b,
-        'dot_prod': dot_ab,
-        'length_a': len_a,
-        'length_b': len_b,
+        'expression': np.array(exp),
+        'dot_prod': dot_prod,
+        'length_a': length_x,
+        'length_b': length_y,
         'angle': angle,
-        'dir_a': dir_a,
-        'dir_b': dir_b,
-        'a_proj_b': a_proj_b,
-        'b_proj_a': b_proj_a,
-        'a_orth_b': a_orth_b,
-        'b_orth_a': b_orth_a
+        'dir_a': np.array(dir_a),
+        'dir_b': np.array(dir_b),
+        'a_proj_b': np.array(a_proj_b),
+        'b_proj_a': np.array(b_proj_a),
+        'a_orth_b': np.array(a_orth_b),
+        'b_orth_a': np.array(b_orth_a)
     }
-
+    
     return answer
 
 
-# In[16]:
+# In[55]:
 
 
 import time
@@ -93,10 +96,4 @@ debug_result = [vector_operations(**x) for x in debug_cases]
 answer = [vector_operations(**x) for x in public_cases]
 
 print(time.time() - start, '<- Elapsed time')
-
-
-# In[ ]:
-
-
-
 

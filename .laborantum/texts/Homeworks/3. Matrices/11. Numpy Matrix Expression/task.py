@@ -1,56 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
-import numpy
-import json_tricks
-import os
-
-numpy.random.seed(42)
-
-debug_cases = []
-for index in range(20):
-    A_shape = numpy.random.randint(1, 10, size=[2])
-    B_shape = numpy.random.randint(1, 10, size=[2])
-    C_shape = numpy.random.randint(1, 10, size=[2])
-    x_shape = numpy.random.randint(1, 10, size=[1])
-    B_shape[0] = A_shape[0]
-    C_shape[0] = A_shape[0]
-    C_shape[1] = B_shape[1]
-    x_shape[0] = B_shape[1]
-    A = numpy.random.randint(-5, 5, size=A_shape)
-    B = numpy.random.randint(-5, 5, size=B_shape)
-    C = numpy.random.randint(-5, 5, size=C_shape)
-    x = numpy.random.randint(-5, 5, size=x_shape)
-    debug_cases.append({'A': A, 'B': B, 'C': C, 'x': x})
-
-os.makedirs('testcases', exist_ok=True)
-with open('testcases/debug_cases.json', 'w+') as fin:
-    fin.write(json_tricks.dumps(debug_cases))
-
-public_cases = []
-for index in range(20):
-    A_shape = numpy.random.randint(1, 30, size=[2])
-    B_shape = numpy.random.randint(1, 30, size=[2])
-    C_shape = numpy.random.randint(1, 30, size=[2])
-    x_shape = numpy.random.randint(1, 30, size=[1])
-    B_shape[0] = A_shape[0]
-    C_shape[0] = A_shape[0]
-    C_shape[1] = B_shape[1]
-    x_shape[0] = B_shape[1]
-    A = numpy.random.randn(*A_shape)
-    B = numpy.random.randn(*B_shape)
-    C = numpy.random.randn(*C_shape)
-    x = numpy.random.randn(*x_shape)
-    public_cases.append({'A': A, 'B': B, 'C': C, 'x': x})
-
-with open('testcases/public_cases.json', 'w+') as fin:
-    fin.write(json_tricks.dumps(public_cases))
-
-
-# In[1]:
+# In[27]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -78,17 +29,33 @@ public_cases = json_tricks.load(
     str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[6]:
+# In[28]:
 
 
 import numpy as np
 
 def formula(A, B, C, x):
-    I = np.eye(A.shape[1], B.shape[1])
-    return np.exp(A.T @ (B + 2 * C) + 3 * I) @ x
+    # YOUR CODE HERE
+    A_T = A.T
+    # B= A_T @ B
+    # C= A_T @ (C)
+    B_2C = B + 2 * C
+
+    A_T_B_2C = A_T @ B_2C
+
+    for i in range(min( len(A_T_B_2C),len(A_T_B_2C[0]))):
+        A_T_B_2C[i][i] += 3
+
+    M = A_T_B_2C
+
+    exp_M = np.exp(M)
+
+    result = exp_M @ x
+    
+    return result
 
 
-# In[7]:
+# In[29]:
 
 
 import time

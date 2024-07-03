@@ -1,7 +1,7 @@
 import numpy as np
 
 answer = {
-    'task1': 1,
-    'task2': 2,
-    'task3': 3
+    'task1': np.array([[30, 36, 42], [66, 81, 96], [102, 126, 150]]),
+    'task2': np.array([[37, 54], [81, 118]]),
+    'task3': np.array([215, 450])
 }

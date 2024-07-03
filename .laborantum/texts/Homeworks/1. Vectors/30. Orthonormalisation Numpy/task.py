@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# In[7]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -23,7 +23,7 @@ os.chdir(path)
 get_ipython().system('{sys.executable} -m pip -q install --user numpy json-tricks torch jupyter nbconvert')
 
 
-# In[9]:
+# In[8]:
 
 
 import json_tricks
@@ -31,30 +31,33 @@ import json_tricks
 path = Path('.laborantum/texts/Homeworks/1. Vectors/30. Orthonormalisation Numpy')
 
 
-# In[10]:
+# In[9]:
 
 
 debug_cases = json_tricks.load(str(path / 'testcases' / 'debug_cases.json'))
 public_cases = json_tricks.load(str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[11]:
+# In[10]:
 
 
 import numpy as np
 
 def orthonormalisation(vecs):
+    ## YOUR CODE HERE
     res = []
-    for vec in vecs:
-        for other in res:
-            vec = vec - (vec * other).sum() / (other * other).sum() * other
-        if np.sqrt((vec * vec).sum()) < 1.0e-4:
-            continue
-        res.append(vec / np.sqrt((vec * vec).sum()))
+    for v in vecs:
+        v = v.astype(float)
+        for u in res:
+            v -= np.dot(v, u) * u
+        norm_v = np.linalg.norm(v)
+        if norm_v >= 1e-4:
+            res.append(v / norm_v)
+    
     return res
 
 
-# In[12]:
+# In[11]:
 
 
 # import numpy
@@ -89,7 +92,7 @@ def orthonormalisation(vecs):
 #     fin.write(json_tricks.dumps(public_cases))
 
 
-# In[13]:
+# In[12]:
 
 
 import time
@@ -102,7 +105,7 @@ answer = [orthonormalisation(**x) for x in public_cases]
 print(time.time() - start, '<- Elapsed time')
 
 
-# In[16]:
+# In[13]:
 
 
 json_tricks.dump(answer, 'test.json')

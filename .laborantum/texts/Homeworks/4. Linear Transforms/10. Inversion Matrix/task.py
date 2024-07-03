@@ -1,33 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-import numpy
-import json_tricks
-import os
-
-numpy.random.seed(42)
-
-debug_cases = []
-for index in range(20):
-    N = numpy.random.randint(1, 20, size=[1])[0]
-    debug_cases.append({'N': N})
-
-os.makedirs('testcases', exist_ok=True)
-with open('testcases/debug_cases.json', 'w+') as fin:
-    fin.write(json_tricks.dumps(debug_cases))
-
-public_cases = []
-for index in range(20):
-    N = numpy.random.randint(1, 20, size=[1])[0]
-    public_cases.append({'N': N})
-
-with open('testcases/public_cases.json', 'w+') as fin:
-    fin.write(json_tricks.dumps(public_cases))
-
-
 # In[2]:
 
 
@@ -62,10 +35,13 @@ public_cases = json_tricks.load(
 import numpy as np
 
 def inversion(N):
-    res = np.zeros([N, N])
-    for index in range(N):
-        res[index, N-index-1] = 1
-    return res
+    # YOUR CODE HERE
+    I = np.eye(N)
+    
+    # Reverse the order of rows
+    reverse_order_matrix = np.flip(I, 0)
+    
+    return reverse_order_matrix
 
 
 # In[4]:

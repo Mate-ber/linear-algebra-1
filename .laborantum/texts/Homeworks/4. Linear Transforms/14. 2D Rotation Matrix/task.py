@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[5]:
 
 
 import numpy
@@ -28,7 +28,7 @@ with open('testcases/public_cases.json', 'w+') as fin:
     fin.write(json_tricks.dumps(public_cases))
 
 
-# In[3]:
+# In[6]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -56,20 +56,25 @@ public_cases = json_tricks.load(
     str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[4]:
+# In[7]:
 
 
 import numpy as np
 
 def rotation_matrix(theta):
-    res = np.array([
-        [np.cos(theta), -np.sin(theta)],
-        [np.sin(theta), np.cos(theta)]
-    ])
-    return res
+    # YOUR CODE HERE
+    # theta_rad = np.deg2rad(theta)
+    
+    cos = np.cos(theta)
+    sin = np.sin(theta)
+    
+    R = np.array([[cos, -sin],
+                  [sin, cos]])
+    
+    return R
 
 
-# In[ ]:
+# In[8]:
 
 
 import time

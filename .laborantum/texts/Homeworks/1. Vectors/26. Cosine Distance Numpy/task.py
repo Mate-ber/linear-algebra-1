@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -23,15 +23,15 @@ os.chdir(path)
 get_ipython().system('{sys.executable} -m pip -q install --user numpy json-tricks torch jupyter nbconvert')
 
 
-# In[2]:
+# In[3]:
 
 
 import json_tricks
 
-path = Path('.laborantum/texts/Homeworks/1. Vectors/13. Sum of Vectors Numpy Vectorized')
+path = Path('.laborantum/texts/Homeworks/1. Vectors/26. Cosine Distance Numpy')
 
 
-# In[3]:
+# In[4]:
 
 
 debug_cases = json_tricks.load(str(path / 'testcases' / 'debug_cases.json'))
@@ -44,7 +44,13 @@ public_cases = json_tricks.load(str(path / 'testcases' / 'public_cases.json'))
 import numpy as np
 
 def cos(x, y):
-    return (x * y).sum() / np.sqrt(x ** 2).sum() / np.sqrt((y ** 2).sum())
+    ## YOUR CODE HERE
+    dot_prod = np.dot(x, y)
+    len_x = np.linalg.norm(x)
+    len_y = np.linalg.norm(y)
+    co = dot_prod / (len_x * len_y)
+    return  co
+
 
 
 # In[8]:
@@ -58,4 +64,10 @@ debug_result = [cos(**x) for x in debug_cases]
 answer = [cos(**x) for x in public_cases]
 
 print(time.time() - start, '<- Elapsed time')
+
+
+# In[ ]:
+
+
+
 
