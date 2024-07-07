@@ -36,7 +36,9 @@ import numpy as np
 
 def scalar_product(B, x, y):
     # YOUR CODE HERE
-    res = np.dot(x_B, y_B)
+    A = B @ B.T
+    Ai = np.linalg.inv(A)
+    res = y.T @ Ai @ x
 
     return res
 

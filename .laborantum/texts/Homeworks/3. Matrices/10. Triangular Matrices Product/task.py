@@ -11,7 +11,7 @@ for i in range(N):
         A[i][j] = 1
         B[i][j] = 1
 
-result = (A.T) * B
+result = (A.T) @ B
 
 answer = {
     'task': result

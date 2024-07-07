@@ -36,11 +36,9 @@ import numpy as np
 
 def co_to_contra(B, x):
     # YOUR CODE HERE
-    B_T = B.T
-    B_inv = np.linalg.inv(B)
-    cov = np.dot(B_inv, x)
-    res = np.dot(B_T, cov)
-    
+    A = B @ B.T
+    Ai = np.linalg.inv(A)
+    res = Ai @ x
     return res
 
 

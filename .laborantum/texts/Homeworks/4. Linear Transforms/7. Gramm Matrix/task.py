@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[10]:
+# In[1]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -29,7 +29,7 @@ public_cases = json_tricks.load(
     str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[11]:
+# In[2]:
 
 
 import numpy as np
@@ -37,16 +37,14 @@ import numpy as np
 def contra_to_co(B, x):
     # YOUR CODE HERE
 
-    B = np.array(B)
-    B = B / np.linalg.norm(B, axis=0)
+    A = B @ B.T
 
-    # Compute covariant coordinates
-    covariant_coords = x @ B.T
-    
-    return covariant_coords
+    cov = A @ x
+
+    return cov
 
 
-# In[12]:
+# In[3]:
 
 
 import time

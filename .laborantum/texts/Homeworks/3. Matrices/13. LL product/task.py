@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -29,25 +29,23 @@ public_cases = json_tricks.load(
     str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[8]:
+# In[2]:
 
 
 import numpy as np
 
 def LL_product(L1, L2):
     # YOUR CODE HERE
-    # n = L1.shape[0]
-    # C = np.zeros((n, n))
     
-    # for i in range(n):
-    #     for j in range(i + 1):
-    #         C[i, j] = np.dot(L1[i, :i + 1], L2[:i + 1, j])
-    C = L1 * L2
-    #print(C)
-    return C
+    A1 = np.diag(L1)
+    A2 = np.diag(L2)
+
+    res = np.diag(A1 * A2)
+
+    return res
 
 
-# In[9]:
+# In[3]:
 
 
 import time

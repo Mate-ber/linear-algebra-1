@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[78]:
+# In[1]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -29,30 +29,21 @@ public_cases = json_tricks.load(
     str(path / 'testcases' / 'public_cases.json'))
 
 
-# In[79]:
+# In[2]:
 
 
 import numpy as np
 
 def formula(A, B, C, D):
     # YOUR CODE HERE
-    # res1 = np.einsum('mn, no->', B, C)
-    
-    # res2 = np.einsum('lk, km->', D, A)
+    AB = A @ B
+    ABC = AB @ C
+    res = D @ ABC
 
-    # res = res.T
-    # #D = D.T
-
-    res = np.einsum('km,mn,no,lk->', A, B,C,D)
-
-    #print(res1*res2)
-    #print(res)
-
-    
     return res
 
 
-# In[80]:
+# In[3]:
 
 
 import time
