@@ -10,7 +10,6 @@ def plu_decomposition(A):
     L = np.eye(n)
     
     p, U, identity_matrix = gauss_elimination_1(A, identity_matrix)
-
     P, u, L = gauss_elimination_1(identity_matrix, L)
 
     return P, L, U

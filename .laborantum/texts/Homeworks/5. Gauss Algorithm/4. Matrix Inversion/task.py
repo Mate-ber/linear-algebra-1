@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[16]:
 
 
 get_ipython().run_line_magic('reload_ext', 'autoreload')
@@ -12,7 +12,7 @@ sys.path.append('../../../../../code/')
 sys.path.append('code')
 
 
-# In[3]:
+# In[17]:
 
 
 from invert_matrix import invert_matrix
@@ -20,7 +20,7 @@ import numpy as np
 
 
 
-# In[4]:
+# In[18]:
 
 
 import sys
@@ -48,7 +48,7 @@ public_cases = json_tricks.load(
 # print(public_cases)
 
 
-# In[5]:
+# In[19]:
 
 
 import time
@@ -61,7 +61,7 @@ answer = [invert_matrix(**x) for x in public_cases]
 print(time.time() - start, '<- Elapsed time')
 
 
-# In[6]:
+# In[20]:
 
 
 print("Checking misfits |Ax - b|:")
